@@ -73,6 +73,18 @@ extension NoteListViewController: UITableViewDelegate {
         noteVC.note = note
         navigationController?.pushViewController(noteVC, animated: true)
     }
+
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
+        if editingStyle == .delete {
+            let note = noteList.remove(at: indexPath.row)
+            noteTableView.deleteRows(at: [indexPath], with: .automatic)
+            StorageManager.shared.delete(note)
+        }
+    }
 }
 
 extension NoteListViewController: NoteListViewControllerDelegate {
