@@ -12,20 +12,36 @@ class NoteListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSubviews(noteTableView)
-        setupConstraints()
+        setupNavigationBar()
         setupUI()
+        setupConstraints()
     }
 
-    private func setSubviews(_ subviews: UIView...) {
-        subviews.forEach { view.addSubview($0) }
+    private func setupNavigationBar() {
+        navigationItem.title = "Notes"
+        navigationController?.navigationBar.prefersLargeTitles = true
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addNewNote)
+        )
+        navigationController?.navigationBar.tintColor = .black
+    }
+
+    @objc
+    private func addNewNote() {
+
     }
 
     private func setupUI() {
         view.backgroundColor = .white
 
-        navigationItem.title = "Notes"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        setSubviews(noteTableView)
+    }
+
+    private func setSubviews(_ subviews: UIView...) {
+        subviews.forEach { view.addSubview($0) }
     }
 
     private func setupConstraints() {

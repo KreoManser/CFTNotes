@@ -8,7 +8,11 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    var window: UIWindow?
+    var window: UIWindow? {
+        didSet {
+            window?.overrideUserInterfaceStyle = .light
+        }
+    }
 
     func scene(
         _ scene: UIScene,
