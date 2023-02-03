@@ -12,16 +12,13 @@ protocol NoteListViewControllerDelegate {
 }
 
 class NoteListViewController: UIViewController {
-    private let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private lazy var noteTableView: UITableView = .init(frame: .zero)
-    private var noteList: [Note] = []
     private let identifier = "NoteCell"
+    private var noteList: [Note] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        noteTableView.delegate = self
-        noteTableView.dataSource = self
         fetchData()
     }
 
@@ -33,12 +30,13 @@ class NoteListViewController: UIViewController {
     }
 
     private func fetchData() {
-        let request = Note.fetchRequest()
-
-        do {
-            noteList = try viewContext.fetch(request)
-        } catch {
-            print(error.localizedDescription)
+        StorageManager.shared.fetchData { [unowned self] result in
+            switch result {
+            case .success(let noteList):
+                self.noteList = noteList
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }
@@ -67,7 +65,14 @@ extension NoteListViewController: UITableViewDataSource {
 }
 
 extension NoteListViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let note = noteList[indexPath.row]
+        let noteVC = NoteViewController()
+        noteVC.delegate = self
+        noteVC.noteTextView.text = (note.title ?? "") + (note.body ?? "")
+        noteVC.note = note
+        navigationController?.pushViewController(noteVC, animated: true)
+    }
 }
 
 extension NoteListViewController: NoteListViewControllerDelegate {
@@ -78,8 +83,10 @@ extension NoteListViewController: NoteListViewControllerDelegate {
 }
 
 extension NoteListViewController {
-
     private func setupUI() {
+        noteTableView.delegate = self
+        noteTableView.dataSource = self
+
         view.backgroundColor = .white
         setupNavigationBar()
         setSubviews(noteTableView)

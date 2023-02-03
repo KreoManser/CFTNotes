@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A3E43D6298D274900D2CDE8 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3E43D5298D274900D2CDE8 /* NoteViewController.swift */; };
 		0A3E43DC298D67FE00D2CDE8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3E43DB298D67FE00D2CDE8 /* StringExtensions.swift */; };
+		0A3E43DE298D7EB300D2CDE8 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3E43DD298D7EB300D2CDE8 /* StorageManager.swift */; };
 		0AE231CC298D1F480034C84D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE231CB298D1F480034C84D /* AppDelegate.swift */; };
 		0AE231CE298D1F480034C84D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE231CD298D1F480034C84D /* SceneDelegate.swift */; };
 		0AE231D0298D1F480034C84D /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE231CF298D1F480034C84D /* NoteListViewController.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		0A3E43D5298D274900D2CDE8 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		0A3E43DB298D67FE00D2CDE8 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		0A3E43DD298D7EB300D2CDE8 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		0AE231C8298D1F480034C84D /* CFTNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CFTNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE231CB298D1F480034C84D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AE231CD298D1F480034C84D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3E43DB298D67FE00D2CDE8 /* StringExtensions.swift */,
+				0A3E43DD298D7EB300D2CDE8 /* StorageManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				0AE231D0298D1F480034C84D /* NoteListViewController.swift in Sources */,
 				0AE231CC298D1F480034C84D /* AppDelegate.swift in Sources */,
 				0AE231CE298D1F480034C84D /* SceneDelegate.swift in Sources */,
+				0A3E43DE298D7EB300D2CDE8 /* StorageManager.swift in Sources */,
 				0A3E43DC298D67FE00D2CDE8 /* StringExtensions.swift in Sources */,
 				0A3E43D6298D274900D2CDE8 /* NoteViewController.swift in Sources */,
 				0AE231D6298D1F480034C84D /* CFTNotes.xcdatamodeld in Sources */,
