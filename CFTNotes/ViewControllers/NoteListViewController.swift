@@ -31,7 +31,8 @@ class NoteListViewController: UIViewController {
 
     @objc
     private func addNewNote() {
-
+        let noteVC = NoteViewController()
+        navigationController?.pushViewController(noteVC, animated: true)
     }
 
     private func setupUI() {
