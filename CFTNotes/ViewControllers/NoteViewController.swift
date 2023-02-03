@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 class NoteViewController: UIViewController {
+
+    private let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     private lazy var noteTextView: UITextView = {
         var textView = UITextView()
@@ -26,14 +29,25 @@ class NoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .save,
             target: self,
-            action: #selector(addddddd)
+            action: #selector(saveNote)
         )
         navigationController?.navigationBar.tintColor = .black
     }
 
     @objc
-    private func addddddd() {
+    private func saveNote() {
+        let note = Note(context: viewContext)
+        note.title = noteTextView.text?.components(separatedBy: "\n")[0]
+        note.body = noteTextView.text?.substring(from: (title?.count ?? 0) + 1)
 
+        if viewContext.hasChanges {
+            do {
+                try viewContext.save()
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+        navigationController?.popViewController(animated: true)
     }
 
     private func setupUI() {
@@ -56,4 +70,5 @@ class NoteViewController: UIViewController {
             noteTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
+
 }
