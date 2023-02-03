@@ -11,12 +11,14 @@ class NoteViewController: UIViewController {
     var delegate: NoteListViewControllerDelegate!
     var note: Note?
 
-
     lazy var noteTextView: UITextView = {
         var textView = UITextView()
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        textView.font = .systemFont(ofSize: 18)
         return textView
     }()
+
+    lazy var boldButton = createButton(withTitle: "B", andColor: .blue, action: UIAction { _ in })
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +52,13 @@ class NoteViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
 
-        setSubviews(noteTextView)
+        //        let stackView = UIStackView(
+        //            arrangedSubviews: [ noteTextView, boldButton ]
+        //        )
+        //        stackView.axis = .vertical
+        //
+        //        stackView.translatesAutoresizingMaskIntoConstraints = false
+        setSubviews(noteTextView, boldButton)
     }
 
     private func setSubviews(_ subviews: UIView...) {
@@ -64,23 +72,32 @@ class NoteViewController: UIViewController {
             noteTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             noteTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             noteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            noteTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+        ])
+
+        boldButton.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            boldButton.topAnchor.constraint(equalTo: noteTextView.bottomAnchor, constant: 5),
+            boldButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            boldButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            boldButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
 
-    //    private func createButton(
-    //        withTitle title: String,
-    //        andColor color: UIColor,
-    //        action: UIAction
-    //    ) -> UIButton {
-    //        var attributes = AttributeContainer()
-    //        attributes.font = UIFont.boldSystemFont(ofSize: 18)
-    //
-    //        var buttonConfiguration = UIButton.Configuration.filled ()
-    //        buttonConfiguration.attributedTitle = AttributedString(title, attributes: attributes)
-    //        buttonConfiguration.baseBackgroundColor = color
-    //        return UIButton (configuration: buttonConfiguration, primaryAction: action)
-    //    }
+    private func createButton(
+        withTitle title: String,
+        andColor color: UIColor,
+        action: UIAction
+    ) -> UIButton {
+        var attributes = AttributeContainer()
+        attributes.font = UIFont.boldSystemFont(ofSize: 18)
+
+        var buttonConfiguration = UIButton.Configuration.filled ()
+        buttonConfiguration.attributedTitle = AttributedString(title, attributes: attributes)
+        buttonConfiguration.baseBackgroundColor = color
+        return UIButton (configuration: buttonConfiguration, primaryAction: action)
+    }
 }
 
 //class ViewController: UIViewController {

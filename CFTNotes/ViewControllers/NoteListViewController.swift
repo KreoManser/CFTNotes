@@ -55,10 +55,10 @@ extension NoteListViewController: UITableViewDataSource {
     ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         let note = noteList[indexPath.row]
-        var content = cell.defaultContentConfiguration()
-        content.text = note.title
-        content.secondaryText = note.body
-        cell.contentConfiguration = content
+        var configuration = UIListContentConfiguration.valueCell()
+        configuration.text = note.title
+        configuration.secondaryText = note.body
+        cell.contentConfiguration = configuration
 
         return cell
     }
@@ -84,6 +84,10 @@ extension NoteListViewController: UITableViewDelegate {
             noteTableView.deleteRows(at: [indexPath], with: .automatic)
             StorageManager.shared.delete(note)
         }
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 

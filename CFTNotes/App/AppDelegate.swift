@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if !launchedBefore  {
             UserDefaults.standard.set(true, forKey: "launchedBefore")
-            StorageManager.shared.create("Привет, новый пользователь!", "Добро пожаловать в СFTNotes, тут ты можешь записать что-то важное для себя😸")
+            StorageManager.shared.create("Привет, новый пользователь!\n", "Добро пожаловать в СFTNotes, тут ты можешь записать что-то важное для себя😸")
         }
         return true
     }
