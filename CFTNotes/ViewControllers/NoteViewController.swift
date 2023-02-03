@@ -10,6 +10,8 @@ import CoreData
 
 class NoteViewController: UIViewController {
 
+    var delegate: NoteListViewControllerDelegate!
+
     private let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     private lazy var noteTextView: UITextView = {
@@ -37,16 +39,18 @@ class NoteViewController: UIViewController {
     @objc
     private func saveNote() {
         let note = Note(context: viewContext)
-        note.title = noteTextView.text?.components(separatedBy: "\n")[0]
-        note.body = noteTextView.text?.substring(from: (title?.count ?? 0) + 1)
+        let title = noteTextView.text?.components(separatedBy: "\n")[0]
+        note.title = title
+        note.body = noteTextView.text?.substring(from: title?.count ?? 0)
 
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
-            } catch let error {
+            } catch {
                 print(error.localizedDescription)
             }
         }
+        delegate.reloadData()
         navigationController?.popViewController(animated: true)
     }
 
@@ -70,5 +74,4 @@ class NoteViewController: UIViewController {
             noteTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
-
 }

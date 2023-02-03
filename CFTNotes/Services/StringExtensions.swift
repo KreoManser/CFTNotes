@@ -1,5 +1,4 @@
 public extension String {
-    //right is the first encountered string after left
     func between(_ left: String, _ right: String) -> String? {
         guard
             let leftRange = range(of: left),
