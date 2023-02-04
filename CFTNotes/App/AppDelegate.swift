@@ -15,11 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if !launchedBefore  {
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-            StorageManager.shared.create("Привет, новый пользователь!\n", "Добро пожаловать в СFTNotes, тут ты можешь записать что-то важное для себя😸")
-        }
+//        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+//        if !launchedBefore  {
+//            UserDefaults.standard.set(true, forKey: "launchedBefore")
+//            StorageManager.shared.create("Привет, новый пользователь!\n", "Добро пожаловать в СFTNotes, тут ты можешь записать что-то важное для себя😸")
+//        }
         return true
     }
 
