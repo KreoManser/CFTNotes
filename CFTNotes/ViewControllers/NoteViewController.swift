@@ -25,6 +25,47 @@ class NoteViewController: UIViewController {
         setupConstraints()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerKeyboardNotifications()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    private func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardInfo = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue
+        let keyboardSize = keyboardInfo.cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        noteTextView.contentInset = contentInsets
+        noteTextView.scrollIndicatorInsets = contentInsets
+    }
+
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        noteTextView.contentInset = .zero
+        noteTextView.scrollIndicatorInsets = .zero
+    }
+
     private func setupNavigationBar() {
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(
@@ -57,7 +98,8 @@ class NoteViewController: UIViewController {
     @objc
     private func saveNote() {
         let title = noteTextView.text?.components(separatedBy: "\n")[0]
-//        let title = noteTextView.attributedText.
+        /// Изменить принцип body - теперь это сама заметка, а title только для table view
+//        let body = noteTextView.attributedText
         let body = noteTextView.text?.substring(from: title?.count ?? 0)
         if note != nil {
             StorageManager.shared.update(note!, newName: title ?? "", newBody: body ?? "")
@@ -75,7 +117,7 @@ class NoteViewController: UIViewController {
         let boldAttribute = [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)
         ]
-        string.addAttributes(boldAttribute, range: noteTextView.selectedRange)
+        string.addAttributes(boldAttribute, range: range)
         noteTextView.attributedText = string
         noteTextView.selectedRange = range
     }
@@ -85,9 +127,9 @@ class NoteViewController: UIViewController {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let italicAttribute = [
-            NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 18.0)
+            NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 18)
         ]
-        string.addAttributes(italicAttribute, range: noteTextView.selectedRange)
+        string.addAttributes(italicAttribute, range: range)
         noteTextView.attributedText = string
         noteTextView.selectedRange = range
     }
@@ -97,7 +139,7 @@ class NoteViewController: UIViewController {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-        string.addAttributes(underlineAttribute, range: noteTextView.selectedRange)
+        string.addAttributes(underlineAttribute, range: range)
         noteTextView.attributedText = string
         noteTextView.selectedRange = range
     }
