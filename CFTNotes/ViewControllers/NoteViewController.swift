@@ -179,7 +179,9 @@ extension NoteViewController {
             noteTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             noteTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             noteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+
+        navigationItem.largeTitleDisplayMode = .never
     }
 }

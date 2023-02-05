@@ -115,6 +115,7 @@ extension NoteListViewController {
 
     private func setupNavigationBar() {
         navigationItem.title = "Notes"
+        navigationController?.navigationBar.prefersLargeTitles = true
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
