@@ -98,6 +98,7 @@ class NoteViewController: UIViewController {
 //            )
         ]
         navigationController?.navigationBar.tintColor = .black
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     @objc
@@ -181,7 +182,5 @@ extension NoteViewController {
             noteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-
-        navigationItem.largeTitleDisplayMode = .never
     }
 }
