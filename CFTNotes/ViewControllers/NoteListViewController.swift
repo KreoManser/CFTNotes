@@ -55,9 +55,9 @@ extension NoteListViewController: UITableViewDataSource {
     ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         let note = noteList[indexPath.row]
-        var configuration = UIListContentConfiguration.valueCell()
-        configuration.text = note.title
-        configuration.secondaryText = note.body
+        var configuration = UIListContentConfiguration.sidebarCell()
+//        configuration.text = note.title
+        configuration.attributedText = note.body
         cell.contentConfiguration = configuration
 
         return cell
@@ -69,7 +69,7 @@ extension NoteListViewController: UITableViewDelegate {
         let note = noteList[indexPath.row]
         let noteVC = NoteViewController()
         noteVC.delegate = self
-        noteVC.noteTextView.text = (note.title ?? "") + (note.body ?? "")
+        noteVC.noteTextView.attributedText = note.body
         noteVC.note = note
         navigationController?.pushViewController(noteVC, animated: true)
     }
@@ -87,7 +87,7 @@ extension NoteListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 60
     }
 }
 

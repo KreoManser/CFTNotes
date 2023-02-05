@@ -26,9 +26,8 @@ class StorageManager {
         viewContext = persistentContainer.viewContext
     }
 
-    func create(_ noteName: String, _ noteBody: String) {
+    func create(_ noteBody: NSAttributedString) {
         let note = Note(context: viewContext)
-        note.title = noteName
         note.body = noteBody
         saveContext()
     }
@@ -44,8 +43,7 @@ class StorageManager {
         }
     }
 
-    func update(_ note: Note, newName: String, newBody: String) {
-        note.title = newName
+    func update(_ note: Note, newBody: NSAttributedString) {
         note.body = newBody
         saveContext()
     }

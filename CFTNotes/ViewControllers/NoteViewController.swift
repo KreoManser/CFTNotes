@@ -91,25 +91,30 @@ class NoteViewController: UIViewController {
                 target: self,
                 action: #selector(boldStyle)
             ),
+            UIBarButtonItem(
+                title: "N",
+                style: .plain,
+                target: self,
+                action: #selector(normalStyle)
+            ),
         ]
         navigationController?.navigationBar.tintColor = .black
     }
 
     @objc
     private func saveNote() {
-        let title = noteTextView.text?.components(separatedBy: "\n")[0]
-        /// Изменить принцип body - теперь это сама заметка, а title только для table view
-//        let body = noteTextView.attributedText
-        let body = noteTextView.text?.substring(from: title?.count ?? 0)
+        let body = noteTextView.attributedText
         if note != nil {
-            StorageManager.shared.update(note!, newName: title ?? "", newBody: body ?? "")
+            StorageManager.shared.update(note!, newBody: body ?? NSAttributedString(string: ""))
         } else {
-            StorageManager.shared.create(title ?? "", body ?? "")
+            StorageManager.shared.create(body ?? NSAttributedString(string: ""))
         }
         delegate.reloadData()
         navigationController?.popViewController(animated: true)
     }
+}
 
+extension NoteViewController {
     @objc
     private func boldStyle() {
         let range = noteTextView.selectedRange
@@ -144,6 +149,20 @@ class NoteViewController: UIViewController {
         noteTextView.selectedRange = range
     }
 
+    @objc
+    private func normalStyle() {
+        let range = noteTextView.selectedRange
+        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
+        let normalAttribute = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+        ]
+        string.addAttributes(normalAttribute, range: range)
+        noteTextView.attributedText = string
+        noteTextView.selectedRange = range
+    }
+}
+
+extension NoteViewController {
     private func setupUI() {
         view.backgroundColor = .white
 
@@ -165,14 +184,3 @@ class NoteViewController: UIViewController {
         ])
     }
 }
-
-//    @IBAction func colourTapp(_ sender: Any) {
-//        if let text = textView {
-//            let range = text.selectedRange
-//            let string = NSMutableAttributedString(attributedString: textView.attributedText)
-//            let colorAttribute = [NSAttributedString.Key.foregroundColor: UIColor.red]
-//            string.addAttributes(colorAttribute, range: textView.selectedRange)
-//            textView.attributedText = string
-//            textView.selectedRange = range
-//        }
-//    }
