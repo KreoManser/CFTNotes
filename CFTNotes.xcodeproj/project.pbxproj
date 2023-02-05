@@ -43,13 +43,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A3E43D7298D5E5700D2CDE8 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		0A3E43DA298D67E400D2CDE8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,7 +108,6 @@
 			children = (
 				0A3E43DA298D67E400D2CDE8 /* Services */,
 				0A8A0B3F298D20C0002F81DB /* ViewControllers */,
-				0A3E43D7298D5E5700D2CDE8 /* Models */,
 				0A8A0B40298D20CB002F81DB /* Storyboards */,
 				0A8A0B3E298D20AA002F81DB /* App */,
 				0A8A0B41298D20D8002F81DB /* Resources */,

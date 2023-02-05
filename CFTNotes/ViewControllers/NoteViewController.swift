@@ -1,10 +1,3 @@
-//
-//  NoteViewController.swift
-//  CFTNotes
-//
-//  Created by Сергей Бабич on 03.02.2023.
-//
-
 import UIKit
 
 class NoteViewController: UIViewController {
@@ -77,26 +70,32 @@ class NoteViewController: UIViewController {
                 title: "_",
                 style: .plain,
                 target: self,
-                action: #selector(underlineStyle)
+                action: #selector(addUnderlineStyle)
             ),
             UIBarButtonItem(
                 title: "I",
                 style: .plain,
                 target: self,
-                action: #selector(italicStyle)
+                action: #selector(addItalicStyle)
             ),
             UIBarButtonItem(
                 title: "B",
                 style: .plain,
                 target: self,
-                action: #selector(boldStyle)
+                action: #selector(addBoldStyle)
             ),
             UIBarButtonItem(
                 title: "N",
                 style: .plain,
                 target: self,
-                action: #selector(normalStyle)
+                action: #selector(addNormalStyle)
             ),
+//            UIBarButtonItem(
+//                title: "Photo",
+//                style: .plain,
+//                target: self,
+//                action: #selector(imagePickerController)
+//            )
         ]
         navigationController?.navigationBar.tintColor = .black
     }
@@ -116,7 +115,7 @@ class NoteViewController: UIViewController {
 
 extension NoteViewController {
     @objc
-    private func boldStyle() {
+    private func addBoldStyle() {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let boldAttribute = [
@@ -128,7 +127,7 @@ extension NoteViewController {
     }
 
     @objc
-    private func italicStyle() {
+    private func addItalicStyle() {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let italicAttribute = [
@@ -140,7 +139,7 @@ extension NoteViewController {
     }
 
     @objc
-    private func underlineStyle() {
+    private func addUnderlineStyle() {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
@@ -150,7 +149,7 @@ extension NoteViewController {
     }
 
     @objc
-    private func normalStyle() {
+    private func addNormalStyle() {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let normalAttribute = [

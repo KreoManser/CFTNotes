@@ -1,10 +1,3 @@
-//
-//  NoteListViewController.swift
-//  CFTNotes
-//
-//  Created by Сергей Бабич on 03.02.2023.
-//
-
 import UIKit
 
 protocol NoteListViewControllerDelegate {
@@ -35,9 +28,20 @@ class NoteListViewController: UIViewController {
             case .success(let noteList):
                 self.noteList = noteList
             case .failure(let error):
-                print(error.localizedDescription)
+                    showAlert(with: error.localizedDescription)
             }
         }
+    }
+
+    private func showAlert(with msg: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: "Something wrong!\n \(msg)",
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 }
 
@@ -56,7 +60,6 @@ extension NoteListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         let note = noteList[indexPath.row]
         var configuration = UIListContentConfiguration.sidebarCell()
-//        configuration.text = note.title
         configuration.attributedText = note.body
         cell.contentConfiguration = configuration
 
@@ -112,7 +115,6 @@ extension NoteListViewController {
 
     private func setupNavigationBar() {
         navigationItem.title = "Notes"
-        navigationController?.navigationBar.prefersLargeTitles = true
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,

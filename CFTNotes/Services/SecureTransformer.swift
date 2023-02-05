@@ -1,10 +1,3 @@
-//
-//  SecureTransformer.swift
-//  CFTNotes
-//
-//  Created by Сергей Бабич on 05.02.2023.
-//
-
 import Foundation
 
 @objc(NSAttributedStringValueTransformer)
@@ -16,7 +9,6 @@ final class NSAttributedStringValueTransformer: NSSecureUnarchiveFromDataTransfo
         return [NSAttributedString.self]
     }
 
-    /// Registers the transformer.
     public static func register() {
         let transformer = NSAttributedStringValueTransformer()
         ValueTransformer.setValueTransformer(transformer, forName: name)
