@@ -25,9 +25,9 @@ class NoteListViewController: UIViewController {
     private func fetchData() {
         StorageManager.shared.fetchData { [unowned self] result in
             switch result {
-            case .success(let noteList):
-                self.noteList = noteList
-            case .failure(let error):
+                case .success(let noteList):
+                    self.noteList = noteList
+                case .failure(let error):
                     showAlert(with: error.localizedDescription)
             }
         }
