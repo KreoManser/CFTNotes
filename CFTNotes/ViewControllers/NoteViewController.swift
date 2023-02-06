@@ -2,13 +2,14 @@ import UIKit
 import PhotosUI
 
 class NoteViewController: UIViewController {
+    private var sizeFont: CGFloat = 18
     var delegate: NoteListViewControllerDelegate!
     var note: Note?
 
     lazy var noteTextView: UITextView = {
         var textView = UITextView()
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-        textView.font = .systemFont(ofSize: 18)
+        textView.font = .systemFont(ofSize: sizeFont)
         return textView
     }()
 
@@ -83,7 +84,7 @@ extension NoteViewController: PHPickerViewControllerDelegate {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let boldAttribute = [
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: sizeFont)
         ]
         string.addAttributes(boldAttribute, range: range)
         noteTextView.attributedText = string
@@ -95,7 +96,7 @@ extension NoteViewController: PHPickerViewControllerDelegate {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let italicAttribute = [
-            NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 18)
+            NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: sizeFont)
         ]
         string.addAttributes(italicAttribute, range: range)
         noteTextView.attributedText = string
@@ -117,7 +118,33 @@ extension NoteViewController: PHPickerViewControllerDelegate {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         let normalAttribute = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
+        ]
+        string.addAttributes(normalAttribute, range: range)
+        noteTextView.attributedText = string
+        noteTextView.selectedRange = range
+    }
+
+    @objc
+    private func increaseFont() {
+        sizeFont += 1
+        let range = noteTextView.selectedRange
+        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
+        let normalAttribute = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
+        ]
+        string.addAttributes(normalAttribute, range: range)
+        noteTextView.attributedText = string
+        noteTextView.selectedRange = range
+    }
+
+    @objc
+    private func decreaseFont() {
+        sizeFont -= 1
+        let range = noteTextView.selectedRange
+        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
+        let normalAttribute = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
         ]
         string.addAttributes(normalAttribute, range: range)
         noteTextView.attributedText = string
@@ -177,7 +204,7 @@ extension NoteViewController: PHPickerViewControllerDelegate {
                                 NSAttributedString(
                                     string: "\n",
                                     attributes: [
-                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
                                     ]
                                 ), at: cursorPosition + 1
                             )
@@ -221,6 +248,18 @@ extension NoteViewController {
                 style: .plain,
                 target: self,
                 action: #selector(addNormalStyle)
+            ),
+            UIBarButtonItem(
+                title: "A-",
+                style: .plain,
+                target: self,
+                action: #selector(decreaseFont)
+            ),
+            UIBarButtonItem(
+                title: "A+",
+                style: .plain,
+                target: self,
+                action: #selector(increaseFont)
             ),
             UIBarButtonItem(
                 title: "Photo",
