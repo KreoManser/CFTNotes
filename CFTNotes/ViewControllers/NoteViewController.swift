@@ -64,48 +64,6 @@ class NoteViewController: UIViewController {
         noteTextView.scrollIndicatorInsets = .zero
     }
 
-    private func setupNavigationBar() {
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(
-                barButtonSystemItem: .save,
-                target: self,
-                action: #selector(saveNote)
-            ),
-            UIBarButtonItem(
-                title: "_",
-                style: .plain,
-                target: self,
-                action: #selector(addUnderlineStyle)
-            ),
-            UIBarButtonItem(
-                title: "I",
-                style: .plain,
-                target: self,
-                action: #selector(addItalicStyle)
-            ),
-            UIBarButtonItem(
-                title: "B",
-                style: .plain,
-                target: self,
-                action: #selector(addBoldStyle)
-            ),
-            UIBarButtonItem(
-                title: "N",
-                style: .plain,
-                target: self,
-                action: #selector(addNormalStyle)
-            ),
-            UIBarButtonItem(
-                title: "Photo",
-                style: .plain,
-                target: self,
-                action: #selector(addPhoto)
-            )
-        ]
-        navigationController?.navigationBar.tintColor = .black
-        navigationItem.largeTitleDisplayMode = .never
-    }
-
     @objc
     private func saveNote() {
         let body = noteTextView.attributedText
@@ -233,6 +191,48 @@ extension NoteViewController: PHPickerViewControllerDelegate {
 }
 
 extension NoteViewController {
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(
+                barButtonSystemItem: .save,
+                target: self,
+                action: #selector(saveNote)
+            ),
+            UIBarButtonItem(
+                title: "_",
+                style: .plain,
+                target: self,
+                action: #selector(addUnderlineStyle)
+            ),
+            UIBarButtonItem(
+                title: "I",
+                style: .plain,
+                target: self,
+                action: #selector(addItalicStyle)
+            ),
+            UIBarButtonItem(
+                title: "B",
+                style: .plain,
+                target: self,
+                action: #selector(addBoldStyle)
+            ),
+            UIBarButtonItem(
+                title: "N",
+                style: .plain,
+                target: self,
+                action: #selector(addNormalStyle)
+            ),
+            UIBarButtonItem(
+                title: "Photo",
+                style: .plain,
+                target: self,
+                action: #selector(addPhoto)
+            )
+        ]
+        navigationController?.navigationBar.tintColor = .black
+        navigationItem.largeTitleDisplayMode = .never
+    }
+
     private func setupUI() {
         view.backgroundColor = .white
 
