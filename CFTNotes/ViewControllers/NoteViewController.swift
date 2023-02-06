@@ -46,8 +46,12 @@ class NoteViewController: UIViewController {
 
     @objc
     private func keyboardWillShow(notification: NSNotification) {
-        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardInfo = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue
+        guard
+            let userInfo: NSDictionary = notification.userInfo as? NSDictionary
+        else { return }
+        guard
+            let keyboardInfo = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue
+        else { return }
         let keyboardSize = keyboardInfo.cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
         noteTextView.contentInset = contentInsets
@@ -177,25 +181,37 @@ extension NoteViewController: PHPickerViewControllerDelegate {
 
         for result in results {
             result.itemProvider.loadObject(
-                ofClass: UIImage.self,
-                completionHandler: { (object, error) in
+                ofClass: UIImage.self, completionHandler: { (object, error) in
                     if let image = object as? UIImage {
                         DispatchQueue.main.async { [unowned self] in
-                            let attributedString = NSMutableAttributedString(attributedString: noteTextView.attributedText)
+                            guard let range = noteTextView.selectedTextRange else { return }
+                            let cursorPosition = noteTextView.offset(
+                                from: noteTextView.beginningOfDocument,
+                                to: range.start
+                            )
+                            let attributedString = NSMutableAttributedString(
+                                attributedString: noteTextView.attributedText
+                            )
                             let textAttachment = NSTextAttachment()
                             textAttachment.image = image
                             guard let imageAttach = textAttachment.image else { return }
-                            let scaleFactor = imageAttach.size.width / (noteTextView.frame.size.width - 40);
+                            let scale = imageAttach.size.width / (noteTextView.frame.size.width - 40);
                             guard let cgImage = imageAttach.cgImage else { return }
-                            textAttachment.image = UIImage(cgImage: cgImage, scale: scaleFactor, orientation: .up)
+                            textAttachment.image = UIImage(
+                                cgImage: cgImage,
+                                scale: scale,
+                                orientation: .up
+                            )
                             let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-                            attributedString.append(attrStringWithImage)
-                            attributedString.append(NSAttributedString(
-                                string: "\n",
-                                attributes: [
-                                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
-                                ]
-                            ))
+                            attributedString.insert(attrStringWithImage, at: cursorPosition)
+                            attributedString.insert(
+                                NSAttributedString(
+                                    string: "\n",
+                                    attributes: [
+                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+                                    ]
+                                ), at: cursorPosition + 1
+                            )
                             noteTextView.attributedText = attributedString
                         }
                     }
