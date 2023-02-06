@@ -184,7 +184,9 @@ extension NoteViewController: PHPickerViewControllerDelegate {
                 ofClass: UIImage.self, completionHandler: { (object, error) in
                     if let image = object as? UIImage {
                         DispatchQueue.main.async { [unowned self] in
-                            guard let range = noteTextView.selectedTextRange else { return }
+                            guard
+                                let range = noteTextView.selectedTextRange
+                            else { return showAlert(with: "Range error")}
                             let cursorPosition = noteTextView.offset(
                                 from: noteTextView.beginningOfDocument,
                                 to: range.start
@@ -194,9 +196,13 @@ extension NoteViewController: PHPickerViewControllerDelegate {
                             )
                             let textAttachment = NSTextAttachment()
                             textAttachment.image = image
-                            guard let imageAttach = textAttachment.image else { return }
+                            guard
+                                let imageAttach = textAttachment.image
+                            else { return showAlert(with: "Image error") }
                             let scale = imageAttach.size.width / (noteTextView.frame.size.width - 40);
-                            guard let cgImage = imageAttach.cgImage else { return }
+                            guard
+                                let cgImage = imageAttach.cgImage
+                            else { return showAlert(with: "Image error") }
                             textAttachment.image = UIImage(
                                 cgImage: cgImage,
                                 scale: scale,
@@ -241,5 +247,18 @@ extension NoteViewController {
             noteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+}
+
+extension NoteViewController {
+    private func showAlert(with msg: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: "Something wrong!\n \(msg)",
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 }
