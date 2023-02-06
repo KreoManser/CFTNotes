@@ -181,7 +181,12 @@ extension NoteViewController: PHPickerViewControllerDelegate {
 
         for result in results {
             result.itemProvider.loadObject(
-                ofClass: UIImage.self, completionHandler: { (object, error) in
+                ofClass: UIImage.self, completionHandler: { [self] (object, error) in
+                    if let error = error {
+                        DispatchQueue.main.async { [unowned self] in
+                            showAlert(with: error.localizedDescription)
+                        }
+                    }
                     if let image = object as? UIImage {
                         DispatchQueue.main.async { [unowned self] in
                             guard
