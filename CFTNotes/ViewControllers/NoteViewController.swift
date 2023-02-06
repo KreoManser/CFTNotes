@@ -1,4 +1,5 @@
 import UIKit
+import PhotosUI
 
 class NoteViewController: UIViewController {
     var delegate: NoteListViewControllerDelegate!
@@ -90,12 +91,12 @@ class NoteViewController: UIViewController {
                 target: self,
                 action: #selector(addNormalStyle)
             ),
-//            UIBarButtonItem(
-//                title: "Photo",
-//                style: .plain,
-//                target: self,
-//                action: #selector(imagePickerController)
-//            )
+            UIBarButtonItem(
+                title: "Photo",
+                style: .plain,
+                target: self,
+                action: #selector(addPhoto)
+            )
         ]
         navigationController?.navigationBar.tintColor = .black
         navigationItem.largeTitleDisplayMode = .never
@@ -114,7 +115,7 @@ class NoteViewController: UIViewController {
     }
 }
 
-extension NoteViewController {
+extension NoteViewController: PHPickerViewControllerDelegate {
     @objc
     private func addBoldStyle() {
         let range = noteTextView.selectedRange
@@ -159,6 +160,48 @@ extension NoteViewController {
         string.addAttributes(normalAttribute, range: range)
         noteTextView.attributedText = string
         noteTextView.selectedRange = range
+    }
+
+    @objc
+    private func addPhoto() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .images
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        for result in results {
+            result.itemProvider.loadObject(
+                ofClass: UIImage.self,
+                completionHandler: { (object, error) in
+                    if let image = object as? UIImage {
+                        DispatchQueue.main.async { [unowned self] in
+                            let attributedString = NSMutableAttributedString(attributedString: noteTextView.attributedText)
+                            let textAttachment = NSTextAttachment()
+                            textAttachment.image = image
+                            guard let imageAttach = textAttachment.image else { return }
+                            let scaleFactor = imageAttach.size.width / (noteTextView.frame.size.width - 40);
+                            guard let cgImage = imageAttach.cgImage else { return }
+                            textAttachment.image = UIImage(cgImage: cgImage, scale: scaleFactor, orientation: .up)
+                            let attrStringWithImage = NSAttributedString(attachment: textAttachment)
+                            attributedString.append(attrStringWithImage)
+                            attributedString.append(NSAttributedString(
+                                string: "\n",
+                                attributes: [
+                                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+                                ]
+                            ))
+                            noteTextView.attributedText = attributedString
+                        }
+                    }
+                }
+            )
+        }
     }
 }
 
