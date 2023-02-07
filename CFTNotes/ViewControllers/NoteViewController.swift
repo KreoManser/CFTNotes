@@ -78,36 +78,44 @@ class NoteViewController: UIViewController {
     }
 }
 
+extension UITextView {
+    func newAttributesForTextView(for textView: UITextView, with attributes: [NSAttributedString.Key : UIFont]) {
+        let range = textView.selectedRange
+        let string = NSMutableAttributedString(attributedString: textView.attributedText)
+        let attrs = attributes
+        string.addAttributes(attrs, range: range)
+        textView.attributedText = string
+        textView.selectedRange = range
+    }
+
+//    func increaseFontSize () {
+//        self.font = UIFont(name: (self.font?.fontName)!, size: (self.font?.pointSize)!+1)!
+//    }
+}
+
 extension NoteViewController: PHPickerViewControllerDelegate {
     @objc
     private func addBoldStyle() {
-        let range = noteTextView.selectedRange
-        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
-        let boldAttribute = [
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: sizeFont)
-        ]
-        string.addAttributes(boldAttribute, range: range)
-        noteTextView.attributedText = string
-        noteTextView.selectedRange = range
+        noteTextView.newAttributesForTextView(
+            for: noteTextView,
+            with: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: sizeFont)])
     }
 
     @objc
     private func addItalicStyle() {
-        let range = noteTextView.selectedRange
-        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
-        let italicAttribute = [
-            NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: sizeFont)
-        ]
-        string.addAttributes(italicAttribute, range: range)
-        noteTextView.attributedText = string
-        noteTextView.selectedRange = range
+        noteTextView.newAttributesForTextView(
+            for: noteTextView,
+            with: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: sizeFont)]
+        )
     }
 
     @objc
     private func addUnderlineStyle() {
         let range = noteTextView.selectedRange
         let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
-        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+        let underlineAttribute = [
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue
+        ]
         string.addAttributes(underlineAttribute, range: range)
         noteTextView.attributedText = string
         noteTextView.selectedRange = range
@@ -115,40 +123,40 @@ extension NoteViewController: PHPickerViewControllerDelegate {
 
     @objc
     private func addNormalStyle() {
-        let range = noteTextView.selectedRange
-        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
-        let normalAttribute = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
-        ]
-        string.addAttributes(normalAttribute, range: range)
-        noteTextView.attributedText = string
-        noteTextView.selectedRange = range
+        noteTextView.newAttributesForTextView(
+            for: noteTextView,
+            with: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)]
+        )
     }
 
     @objc
     private func increaseFont() {
-        sizeFont += 1
-        let range = noteTextView.selectedRange
-        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
-        let normalAttribute = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
-        ]
-        string.addAttributes(normalAttribute, range: range)
-        noteTextView.attributedText = string
-        noteTextView.selectedRange = range
+//        sizeFont += 1
+//        let range = noteTextView.selectedRange
+//        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
+//        let normalAttribute = [
+//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
+//        ]
+//        string.addAttributes(normalAttribute, range: range)
+//        noteTextView.attributedText = string
+//        noteTextView.selectedRange = range
+//        noteTextView.newAttributesForTextView(
+//            for: noteTextView,
+//            with: [NSAttributedString.Key.font: UIFont(name: (noteTextView.font?.fontName)!, size: (noteTextView.font?.pointSize)!+1)!]
+//        )
     }
 
     @objc
     private func decreaseFont() {
-        sizeFont -= 1
-        let range = noteTextView.selectedRange
-        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
-        let normalAttribute = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
-        ]
-        string.addAttributes(normalAttribute, range: range)
-        noteTextView.attributedText = string
-        noteTextView.selectedRange = range
+//        sizeFont -= 1
+//        let range = noteTextView.selectedRange
+//        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
+//        let normalAttribute = [
+//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
+//        ]
+//        string.addAttributes(normalAttribute, range: range)
+//        noteTextView.attributedText = string
+//        noteTextView.selectedRange = range
     }
 
     @objc
