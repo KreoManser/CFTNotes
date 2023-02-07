@@ -242,18 +242,18 @@ extension NoteViewController {
                 target: self,
                 action: #selector(addNormalStyle)
             ),
-            UIBarButtonItem(
-                title: "A-",
-                style: .plain,
-                target: self,
-                action: #selector(decreaseFont)
-            ),
-            UIBarButtonItem(
-                title: "A+",
-                style: .plain,
-                target: self,
-                action: #selector(increaseFont)
-            ),
+//            UIBarButtonItem(
+//                title: "A-",
+//                style: .plain,
+//                target: self,
+//                action: #selector(decreaseFont)
+//            ),
+//            UIBarButtonItem(
+//                title: "A+",
+//                style: .plain,
+//                target: self,
+//                action: #selector(increaseFont)
+//            ),
             UIBarButtonItem(
                 title: "Photo",
                 style: .plain,
