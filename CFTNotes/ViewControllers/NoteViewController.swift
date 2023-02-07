@@ -112,6 +112,11 @@ extension NoteViewController: PHPickerViewControllerDelegate {
             for: noteTextView,
             with: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)]
         )
+        let range = noteTextView.selectedRange
+        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
+        string.removeAttribute(NSAttributedString.Key.underlineStyle, range: range)
+        noteTextView.attributedText = string
+        noteTextView.selectedRange = range
     }
 
     @objc
