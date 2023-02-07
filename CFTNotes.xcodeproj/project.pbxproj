@@ -50,7 +50,6 @@
 			children = (
 				0A3E43DD298D7EB300D2CDE8 /* StorageManager.swift */,
 				0A784630298FDDEA00AF3F67 /* SecureTransformer.swift */,
-				0A7846322991CE9500AF3F67 /* UITextViewExtension.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -68,6 +67,7 @@
 		0A8A0B3F298D20C0002F81DB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0A7846322991CE9500AF3F67 /* UITextViewExtension.swift */,
 				0AE231CF298D1F480034C84D /* NoteListViewController.swift */,
 				0A3E43D5298D274900D2CDE8 /* NoteViewController.swift */,
 			);
