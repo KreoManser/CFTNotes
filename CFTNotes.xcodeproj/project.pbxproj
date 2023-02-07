@@ -10,6 +10,7 @@
 		0A3E43D6298D274900D2CDE8 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3E43D5298D274900D2CDE8 /* NoteViewController.swift */; };
 		0A3E43DE298D7EB300D2CDE8 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3E43DD298D7EB300D2CDE8 /* StorageManager.swift */; };
 		0A784631298FDDEA00AF3F67 /* SecureTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A784630298FDDEA00AF3F67 /* SecureTransformer.swift */; };
+		0A7846332991CE9500AF3F67 /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7846322991CE9500AF3F67 /* UITextViewExtension.swift */; };
 		0AE231CC298D1F480034C84D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE231CB298D1F480034C84D /* AppDelegate.swift */; };
 		0AE231CE298D1F480034C84D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE231CD298D1F480034C84D /* SceneDelegate.swift */; };
 		0AE231D0298D1F480034C84D /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE231CF298D1F480034C84D /* NoteListViewController.swift */; };
@@ -22,6 +23,7 @@
 		0A3E43D5298D274900D2CDE8 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		0A3E43DD298D7EB300D2CDE8 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		0A784630298FDDEA00AF3F67 /* SecureTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTransformer.swift; sourceTree = "<group>"; };
+		0A7846322991CE9500AF3F67 /* UITextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewExtension.swift; sourceTree = "<group>"; };
 		0AE231C8298D1F480034C84D /* CFTNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CFTNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE231CB298D1F480034C84D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AE231CD298D1F480034C84D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 			children = (
 				0A3E43DD298D7EB300D2CDE8 /* StorageManager.swift */,
 				0A784630298FDDEA00AF3F67 /* SecureTransformer.swift */,
+				0A7846322991CE9500AF3F67 /* UITextViewExtension.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				0A784631298FDDEA00AF3F67 /* SecureTransformer.swift in Sources */,
 				0A3E43D6298D274900D2CDE8 /* NoteViewController.swift in Sources */,
 				0AE231D6298D1F480034C84D /* CFTNotes.xcdatamodeld in Sources */,
+				0A7846332991CE9500AF3F67 /* UITextViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
