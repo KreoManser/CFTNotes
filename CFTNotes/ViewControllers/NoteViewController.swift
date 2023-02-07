@@ -115,36 +115,6 @@ extension NoteViewController: PHPickerViewControllerDelegate {
     }
 
     @objc
-    private func increaseFont() {
-//        sizeFont += 1
-//        let range = noteTextView.selectedRange
-//        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
-//        let normalAttribute = [
-//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
-//        ]
-//        string.addAttributes(normalAttribute, range: range)
-//        noteTextView.attributedText = string
-//        noteTextView.selectedRange = range
-//        noteTextView.newAttributesForTextView(
-//            for: noteTextView,
-//            with: [NSAttributedString.Key.font: UIFont(name: (noteTextView.font?.fontName)!, size: (noteTextView.font?.pointSize)!+1)!]
-//        )
-    }
-
-    @objc
-    private func decreaseFont() {
-//        sizeFont -= 1
-//        let range = noteTextView.selectedRange
-//        let string = NSMutableAttributedString(attributedString: noteTextView.attributedText)
-//        let normalAttribute = [
-//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: sizeFont)
-//        ]
-//        string.addAttributes(normalAttribute, range: range)
-//        noteTextView.attributedText = string
-//        noteTextView.selectedRange = range
-    }
-
-    @objc
     private func addPhoto() {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 1
@@ -242,18 +212,6 @@ extension NoteViewController {
                 target: self,
                 action: #selector(addNormalStyle)
             ),
-//            UIBarButtonItem(
-//                title: "A-",
-//                style: .plain,
-//                target: self,
-//                action: #selector(decreaseFont)
-//            ),
-//            UIBarButtonItem(
-//                title: "A+",
-//                style: .plain,
-//                target: self,
-//                action: #selector(increaseFont)
-//            ),
             UIBarButtonItem(
                 title: "Photo",
                 style: .plain,
@@ -267,7 +225,6 @@ extension NoteViewController {
 
     private func setupUI() {
         view.backgroundColor = .white
-
         setSubviews(noteTextView)
     }
 
@@ -279,10 +236,14 @@ extension NoteViewController {
         noteTextView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            noteTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            noteTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            noteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            noteTextView.topAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            noteTextView.leadingAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            noteTextView.trailingAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            noteTextView.bottomAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 }
