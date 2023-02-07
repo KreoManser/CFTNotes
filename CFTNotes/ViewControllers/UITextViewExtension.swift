@@ -9,8 +9,4 @@ extension UITextView {
         textView.attributedText = string
         textView.selectedRange = range
     }
-
-//    func increaseFontSize () {
-//        self.font = UIFont(name: (self.font?.fontName)!, size: (self.font?.pointSize)!+1)!
-//    }
 }
