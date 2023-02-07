@@ -10,7 +10,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if !launchedBefore  {
             UserDefaults.standard.set(true, forKey: "launchedBefore")
-            StorageManager.shared.create(NSAttributedString(string: "Привет, новый пользователь!\nДобро пожаловать в СFTNotes, тут ты можешь записать что-то важное для себя😸", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),]))
+            StorageManager.shared.create(
+                NSAttributedString(
+                    string: "Привет, новый пользователь!\nДобро пожаловать в СFTNotes, тут ты можешь записать что-то важное для себя😸",
+                    attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)]
+                )
+            )
         }
         return true
     }
