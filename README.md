@@ -2,7 +2,7 @@
 
 <img src="https://github.com/KreoManser/CFTNotes/blob/main/ImagesForRepository/imgonline-com-ua-Resize-g2anTJ6eBbxUd.jpg?raw=true" width="100" height="100">
 
-Это приложение - тестовое задание в компанию СFTShift. Концепция заключалась в создании заметок
+Это приложение - тестовое задание в компанию СFTShift. Концепция заключалась в создании заметок.
 
 ##Скрины экранов
 
